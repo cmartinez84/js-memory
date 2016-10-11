@@ -21,11 +21,12 @@ $(function(){
   var card1;
   var card2;
   var clickCount = 0;
-  var match = 0;
+  var game = new Game();
+
   $("div").click(function(){
 
     $(this).children().show();
-    var game = new Game();
+
     if (clickCount === 0){
       card1 = $(this).children().attr('src');
       div1 = $(this);
@@ -39,16 +40,15 @@ $(function(){
 
       var result = game.findMatch(card1, card2);
       if(result){
-        match +=1;
-        console.log(match);
-        if(match === 5){
+        if(game.matchCount === 5){
           alert("hurray");
           $("div").children().hide();
+          game.matchCount = 0;
         }
       }
       else{
-        div1.children().hide(1000);
-        div2.children().hide(1000);
+        div1.children().hide(400);
+        div2.children().hide(400);
       }
     }
 
